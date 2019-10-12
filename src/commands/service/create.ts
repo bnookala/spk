@@ -6,7 +6,7 @@ import { logger } from "../../logger";
 import {
   addNewServiceToBedrockFile,
   addNewServiceToMaintainersFile,
-  generateAzurePipelinesYaml,
+  generateStarterAzurePipelinesYaml,
   generateGitIgnoreFile
 } from "../../lib/fileutils";
 import {
@@ -215,7 +215,7 @@ export const createService = async (
   shelljs.mkdir("-p", newServiceDir);
 
   // Create azure pipelines yaml in directory
-  await generateAzurePipelinesYaml(rootProjectPath, newServiceDir);
+  await generateStarterAzurePipelinesYaml(rootProjectPath, newServiceDir);
 
   // Create empty .gitignore file in directory
   generateGitIgnoreFile(newServiceDir, "");

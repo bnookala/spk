@@ -5,8 +5,8 @@ import path from "path";
 import shelljs from "shelljs";
 import { promisify } from "util";
 import {
-  generateAzurePipelinesYaml,
-  generateGitIgnoreFile
+  generateGitIgnoreFile,
+  generateStarterAzurePipelinesYaml
 } from "../../lib/fileutils";
 import { exec } from "../../lib/shell";
 import { logger } from "../../logger";
@@ -98,7 +98,7 @@ export const initialize = async (
   const gitIgnoreFileContent = "spk.log";
 
   for (const absPackagePath of absPackagePaths) {
-    await generateAzurePipelinesYaml(absProjectRoot, absPackagePath);
+    await generateStarterAzurePipelinesYaml(absProjectRoot, absPackagePath);
     generateGitIgnoreFile(absPackagePath, gitIgnoreFileContent);
   }
 
