@@ -3,11 +3,11 @@ import fs from "fs";
 import yaml from "js-yaml";
 import path from "path";
 import shelljs from "shelljs";
+import { generateHldAzurePipelinesYaml } from "../../lib/fileutils";
 import { checkoutCommitPushCreatePRLink } from "../../lib/gitutils";
 import { exec } from "../../lib/shell";
 import { logger } from "../../logger";
 import { IAzurePipelinesYaml } from "../../types";
-import { generateHldAzurePipelinesYaml } from "../../lib/fileutils";
 
 /**
  * Adds the init command to the hld command object
