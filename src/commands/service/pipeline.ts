@@ -140,7 +140,6 @@ export const installPipeline = async (
   try {
     devopsClient = await getBuildApiClient(orgUrl, personalAccessToken);
     logger.info("Fetched DevOps Client");
-    logger.info(devopsClient!);
   } catch (err) {
     logger.error(err);
     return exitFn(1);
@@ -170,7 +169,6 @@ export const installPipeline = async (
   }
 
   logger.info(`Created pipeline for ${pipelineName}`);
-  logger.info(builtDefinition as BuildDefinition);
   logger.info(`Pipeline ID: ${(builtDefinition as BuildDefinition).id}`);
 
   try {
