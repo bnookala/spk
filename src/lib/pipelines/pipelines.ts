@@ -189,6 +189,10 @@ export const definitionForGithubRepoPipeline = (
     yamlFilename: pipelineConfig.yamlFilePath
   } as YamlProcess;
 
+  if (pipelineConfig.variables) {
+    pipelineDefinition.variables = pipelineConfig.variables;
+  }
+
   return pipelineDefinition;
 };
 

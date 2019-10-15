@@ -8,7 +8,10 @@ import {
   queueBuild
 } from "../../lib/pipelines/pipelines";
 
-import { installHldToManifestPipeline } from "./pipeline";
+import {
+  installHldToManifestPipeline,
+  requiredPipelineVariables
+} from "./pipeline";
 
 beforeAll(() => {
   enableVerboseLogging();
@@ -16,6 +19,19 @@ beforeAll(() => {
 
 afterAll(() => {
   disableVerboseLogging();
+});
+
+describe("required pipeline variables", () => {
+  it("should use access token and repo as pipeline vars", () => {
+    const variables = requiredPipelineVariables("foo", "bar");
+
+    expect(Object.keys(variables).length).toBe(2);
+    expect(variables.ACCESS_TOKEN_SECRET.value).toBe("foo");
+    expect(variables.ACCESS_TOKEN_SECRET.isSecret).toBe(true);
+
+    expect(variables.REPO.value).toBe("bar");
+    expect(variables.REPO.isSecret).toBe(false);
+  });
 });
 
 describe("create hld to manifest pipeline test", () => {
@@ -29,6 +45,7 @@ describe("create hld to manifest pipeline test", () => {
       "wow",
       "amazing",
       "meow",
+      "baz",
       exitFn
     );
 
@@ -45,7 +62,7 @@ describe("create hld to manifest pipeline test", () => {
       "baz",
       "wow",
       "wao",
-
+      "baz",
       exitFn
     );
 
@@ -65,6 +82,7 @@ describe("create hld to manifest pipeline test", () => {
       "baz",
       "wow",
       "wao",
+      "baz",
       exitFn
     );
 
@@ -83,6 +101,7 @@ describe("create hld to manifest pipeline test", () => {
       "baz",
       "wow",
       "wao",
+      "baz",
       exitFn
     );
 

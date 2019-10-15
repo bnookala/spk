@@ -6,8 +6,8 @@ import { logger } from "../../logger";
 import {
   addNewServiceToBedrockFile,
   addNewServiceToMaintainersFile,
-  generateStarterAzurePipelinesYaml,
-  generateGitIgnoreFile
+  generateGitIgnoreFile,
+  generateStarterAzurePipelinesYaml
 } from "../../lib/fileutils";
 import {
   checkoutBranch,

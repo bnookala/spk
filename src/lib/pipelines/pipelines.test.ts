@@ -53,7 +53,7 @@ describe("It builds an azure repo pipeline definition", () => {
     const process = definition.process as YamlProcess;
     expect(process.yamlFilename).toBe(sampleAzureConfig.yamlFilePath);
 
-    const variables = definition.variables;
+    const variables = definition.variables!;
     // tslint:disable-next-line
     expect(variables["foo"].value).toBe("bar");
   });
@@ -96,14 +96,15 @@ describe("It builds a github repo pipeline definition", () => {
     expect(repository.url).toBe(sampleGithubConfig.repositoryUrl);
 
     expect(repository.properties).toBeDefined();
-    expect(repository.properties.connectedServiceId).toBe(
+
+    expect(repository.properties!.connectedServiceId).toBe(
       sampleGithubConfig.serviceConnectionId
     );
 
     const process = definition.process as YamlProcess;
     expect(process.yamlFilename).toBe(sampleGithubConfig.yamlFilePath);
 
-    const variables = definition.variables;
+    const variables = definition.variables!;
     // tslint:disable-next-line
     expect(variables["foo"].value).toBe("bar");
   });

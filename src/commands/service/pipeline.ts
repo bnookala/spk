@@ -1,7 +1,3 @@
-import fs from "fs";
-import yaml from "js-yaml";
-import path from "path";
-
 import commander = require("commander");
 import { logger } from "../../logger";
 
