@@ -445,6 +445,7 @@ export const addChartToRing = async (
   const { chart } = serviceConfig.helm;
   if ("git" in chart) {
     let chartVersioning = "";
+
     if ("branch" in chart) {
       assertIsStringWithContent(chart.branch, "git-branch");
       chartVersioning = `--branch ${chart.branch}`;
@@ -452,13 +453,29 @@ export const addChartToRing = async (
       assertIsStringWithContent(chart.sha, "git-sha");
       chartVersioning = `--version ${chart.sha}`;
     }
+
+    logger.info("Adding helm chart for remote helm git repository");
+
     assertIsStringWithContent(chart.git, "git-url");
     assertIsStringWithContent(chart.path, "git-path");
     addHelmChartCommand = `fab add chart --source ${chart.git} --path ${chart.path} ${chartVersioning} --type helm`;
   } else if ("repository" in chart) {
+    logger.info("Adding helm chart for remote helm repository");
+
     assertIsStringWithContent(chart.repository, "helm-repo");
     assertIsStringWithContent(chart.chart, "helm-chart-name");
+
     addHelmChartCommand = `fab add chart --source ${chart.repository} --path ${chart.chart} --type helm`;
+  } else if ("path" in chart && !("git" in chart)) {
+    logger.info(
+      "Adding helm chart for local helm chart in application repository"
+    );
+
+    assertIsStringWithContent(chart.path, "local chart path in repository");
+
+    // TODO: Figure out how many levels deep we are in the tree and add the helm chart encoded as 'path'.
+    const localPath = `../../../` + chart.path;
+    addHelmChartCommand = `fab add chart --path ${localPath} --method local --type helm`;
   }
 
   return execCmd(`cd ${ringPathInHld} && ${addHelmChartCommand}`).catch(err => {
