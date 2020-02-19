@@ -16,15 +16,6 @@ pool:
   vmImage: "ubuntu-latest"
 
 steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: "$(node_version)"
-    displayName: "Install Node.js"
-
-  - script: |
-      curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-    displayName: "Install az-cli"
-
   - script: |
       git config --get remote.origin.url
-    displayName: "YARN INSTALL"
+    displayName: "GIT ORIGIN"
