@@ -17,5 +17,5 @@ pool:
 
 steps:
   - script: |
-      git config --get remote.origin.url
+      echo $(Build.Repository.Uri)
     displayName: "GIT ORIGIN"
